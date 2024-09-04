@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Escanear Código QR</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <h2>Bienvenido, [Nombre Estudiante]</h2>
+
+  <ion-button expand="block" (click)="openCamera()">
+    Escanear Código QR
+  </ion-button>
+
+  <div *ngIf="attendanceRecorded">
+    <h3>Asistencia Registrada</h3>
+    <p>Fecha: {{ currentDate }}</p>
+    <p>Hora: {{ currentTime }}</p>
+  </div>
+</ion-content>

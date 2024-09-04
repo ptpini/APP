@@ -1,36 +1,35 @@
-// src/app/services/auth.service.ts
-
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private isAuthenticated: boolean = false;
+  private role: 'teacher' | 'student' = 'student';
 
-  private isAuthenticated = false;
-
-  constructor() { }
-
-  /**
-   * Simula el inicio de sesión
-   * @param username Nombre de usuario
-   * @param password Contraseña
-   * @returns boolean si las credenciales son correctas
-   */
   login(username: string, password: string): boolean {
-    // Cambia esta lógica por una llamada a una API real
-    if (username === 'usuario' && password === 'contraseña123') {
+    if (username === 'docente' && password === '12345') {
       this.isAuthenticated = true;
+      this.role = 'teacher';
+      return true;
+    } else if (username === 'estudiante' && password === '12345') {
+      this.isAuthenticated = true;
+      this.role = 'student';
       return true;
     }
     return false;
   }
 
-  logout() {
-    this.isAuthenticated = false;
-  }
-
   isLoggedIn(): boolean {
     return this.isAuthenticated;
   }
+
+  getUserRole(): 'teacher' | 'student' {
+    return this.role;
+  }
+
+  logout() {
+    this.isAuthenticated = false;
+  }
 }
+

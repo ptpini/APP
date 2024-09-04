@@ -1,9 +1,7 @@
-// src/app/login/login.page.ts
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavController } from '@ionic/angular';
-import { AuthService } from '../services/auth.service'; // Servicio de autenticación
+import { AuthService } from '../services/auth.service'; 
 
 @Component({
   selector: 'app-login',
@@ -15,14 +13,9 @@ export class LoginPage implements OnInit {
   loginForm!: FormGroup;
   loginFailed = false;
 
-  constructor(
-    private fb: FormBuilder, 
-    private navCtrl: NavController, 
-    private authService: AuthService // Inyectamos el servicio de autenticación
-  ) { }
+  constructor(private fb: FormBuilder, private navCtrl: NavController, private authService: AuthService) { }
 
   ngOnInit() {
-    // Inicializamos el formulario de login
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]]
@@ -30,16 +23,21 @@ export class LoginPage implements OnInit {
   }
 
   onLogin() {
-    if (this.loginForm.valid) {
-      const { username, password } = this.loginForm.value;
+    const { username, password } = this.loginForm.value;
 
-      const success = this.authService.login(username, password); // Llamada al servicio de autenticación
-      if (success) {
-        this.loginFailed = false;
-        this.navCtrl.navigateRoot('/home'); // Navegamos a la página 'home' si el login es exitoso
+    if (this.authService.login(username, password)) {
+      const role = this.authService.getUserRole();
+      if (role === 'teacher') {
+        this.navCtrl.navigateRoot('/teacherhome');
       } else {
-        this.loginFailed = true; // Mostramos un mensaje de error si falla el login
+        this.navCtrl.navigateRoot('/studenthome');
       }
+    } else {
+      this.loginFailed = true;
     }
+  }
+
+  resetPassword() {
+    console.log('Redirigir a la página de restablecimiento de contraseña');
   }
 }

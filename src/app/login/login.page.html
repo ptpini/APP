@@ -1,19 +1,14 @@
-<!-- src/app/login/login.page.html -->
-
 <ion-header>
   <ion-toolbar>
-    <ion-title>Fleeca Bank</ion-title>
+    <ion-title>RegistrAPP</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-
-  <!-- Contenedor del logo -->
   <div class="logo-container">
-    <img src="assets/icon/fleeca-logo.png" alt="Fleeca Bank Logo">
+    <img src="assets/icon/duoc-logo.png" alt="Logo DuocUC">
   </div>
 
-  <!-- Formulario de Login -->
   <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
     <ion-item>
       <ion-label position="floating">Nombre de Usuario</ion-label>
@@ -25,25 +20,12 @@
       <ion-input type="password" formControlName="password"></ion-input>
     </ion-item>
 
-    <!-- Mensaje de Error -->
-    <ion-text color="danger" *ngIf="loginFailed">
-      Usuario o contraseña incorrectos.
-    </ion-text>
-
-    <!-- Botón de Iniciar Sesión -->
     <ion-button expand="block" type="submit" [disabled]="!loginForm.valid">
       Iniciar Sesión
     </ion-button>
+
+    <ion-button fill="clear" (click)="resetPassword()">
+      ¿Olvidaste tu contraseña?
+    </ion-button>
   </form>
-
-  <!-- Enlaces para registrar o recuperar contraseña -->
-  <ion-row>
-    <ion-col size="6">
-      <ion-button fill="clear" size="small" routerLink="/register">Registrar</ion-button>
-    </ion-col>
-    <ion-col size="6" class="ion-text-end">
-      <ion-button fill="clear" size="small" routerLink="/forgot-password">¿Olvidaste tu contraseña?</ion-button>
-    </ion-col>
-  </ion-row>
-
 </ion-content>

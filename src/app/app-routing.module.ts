@@ -12,12 +12,12 @@ const routes: Routes = [
     loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+    path: 'teacherhome',
+    loadChildren: () => import('./teacherhome/teacherhome.module').then(m => m.TeacherhomePageModule)
   },
   {
-    path: 'cards',  // Ruta para la página de tarjetas
-    loadChildren: () => import('./cards/cards.module').then(m => m.CardsPageModule)
+    path: 'studenthome',
+    loadChildren: () => import('./studenthome/studenthome.module').then(m => m.StudenthomePageModule)
   }
 ];
 
