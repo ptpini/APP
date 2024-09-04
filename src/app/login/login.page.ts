@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NavController } from '@ionic/angular';
+import { NavController, LoadingController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service'; 
 
 @Component({
@@ -13,7 +13,12 @@ export class LoginPage implements OnInit {
   loginForm!: FormGroup;
   loginFailed = false;
 
-  constructor(private fb: FormBuilder, private navCtrl: NavController, private authService: AuthService) { }
+  constructor(
+    private fb: FormBuilder, 
+    private navCtrl: NavController, 
+    private authService: AuthService,
+    private loadingCtrl: LoadingController
+  ) {}
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -22,11 +27,18 @@ export class LoginPage implements OnInit {
     });
   }
 
-  onLogin() {
+  async onLogin() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Iniciando sesión...',
+      spinner: 'circles'
+    });
+    await loading.present();
+
     const { username, password } = this.loginForm.value;
 
     if (this.authService.login(username, password)) {
       const role = this.authService.getUserRole();
+      loading.dismiss();  // Quitar el loading spinner
       if (role === 'teacher') {
         this.navCtrl.navigateRoot('/teacherhome');
       } else {
@@ -34,6 +46,7 @@ export class LoginPage implements OnInit {
       }
     } else {
       this.loginFailed = true;
+      loading.dismiss();  // Quitar el loading spinner si falla
     }
   }
 

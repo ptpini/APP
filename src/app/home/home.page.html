@@ -12,7 +12,6 @@
   <h2 *ngIf="role === 'teacher'">Bienvenido Docente, [Nombre]</h2>
   <h2 *ngIf="role === 'student'">Bienvenido Estudiante, [Nombre]</h2>
 
-  <!-- Mostrar opciones según el rol -->
   <div *ngIf="role === 'teacher'">
     <ion-button expand="block" (click)="navigateToQR()">
       Generar Código QR
@@ -25,10 +24,8 @@
     </ion-button>
   </div>
 
-  <!-- Opciones comunes a ambos roles -->
   <ion-button expand="block" color="danger" (click)="logout()">
     Cerrar Sesión
   </ion-button>
 
 </ion-content>
-
