@@ -1,31 +1,26 @@
+// src/app/app.module.ts
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
-
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthService } from './services/auth.service';  // Importar el servicio de autenticación
-import { AuthGuard } from './guards/auth.guard';  // Importar el guard
+import { AppRoutingModule } from './app-routing.module';
+import { ReactiveFormsModule } from '@angular/forms'; // Para formularios reactivos
+import { AuthService } from './services/auth.service'; // Servicio de autenticación
 
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [],
   imports: [
-    BrowserModule, 
-    IonicModule.forRoot(), 
-    AppRoutingModule
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    ReactiveFormsModule // Para manejar los formularios en la página de login
   ],
   providers: [
-    StatusBar,
-    SplashScreen,
-    AuthService,  // Inyectar el servicio de autenticación
-    AuthGuard,    // Inyectar el guard
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    AuthService // Agrega el AuthService en los proveedores
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,7 +1,9 @@
+// src/app/login/login.page.ts
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavController } from '@ionic/angular';
-import { AuthService } from '../services/auth.service';  // Importar el servicio de autenticación
+import { AuthService } from '../services/auth.service'; // Servicio de autenticación
 
 @Component({
   selector: 'app-login',
@@ -10,16 +12,17 @@ import { AuthService } from '../services/auth.service';  // Importar el servicio
 })
 export class LoginPage implements OnInit {
 
-  loginForm: FormGroup;
+  loginForm!: FormGroup;
   loginFailed = false;
 
   constructor(
     private fb: FormBuilder, 
     private navCtrl: NavController, 
-    private authService: AuthService  // Inyectar el servicio de autenticación
+    private authService: AuthService // Inyectamos el servicio de autenticación
   ) { }
 
   ngOnInit() {
+    // Inicializamos el formulario de login
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]]
@@ -28,21 +31,15 @@ export class LoginPage implements OnInit {
 
   onLogin() {
     if (this.loginForm.valid) {
-      const success = this.authService.login(
-        this.loginForm.value.username, 
-        this.loginForm.value.password
-      );
-      
+      const { username, password } = this.loginForm.value;
+
+      const success = this.authService.login(username, password); // Llamada al servicio de autenticación
       if (success) {
         this.loginFailed = false;
-        console.log('Login successful');
-        this.navCtrl.navigateForward('/home');
+        this.navCtrl.navigateRoot('/home'); // Navegamos a la página 'home' si el login es exitoso
       } else {
-        this.loginFailed = true;
-        console.log('Login failed');
+        this.loginFailed = true; // Mostramos un mensaje de error si falla el login
       }
-    } else {
-      console.log('Form not valid');
     }
   }
 }
