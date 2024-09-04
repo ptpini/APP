@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Tus Tarjetas
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        Cerrar Sesión
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- Listado de tarjetas -->
+  <ion-list>
+    <ion-list-header>
+      Tarjetas Asociadas
+    </ion-list-header>
+
+    <ion-item *ngFor="let card of cards">
+      <ion-label>
+        <h2>{{ card.type }} •••• {{ card.last4 }}</h2>
+        <p>Fecha de vencimiento: {{ card.expiry }}</p>
+        <p [ngClass]="{'active': card.status === 'Activa', 'blocked': card.status === 'Bloqueada'}">{{ card.status }}</p>
+      </ion-label>
+      <ion-button slot="end" (click)="manageCard(card)">
+        Gestionar
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <!-- Botón para añadir una nueva tarjeta -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addCard()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>
