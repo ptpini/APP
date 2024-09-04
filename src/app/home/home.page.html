@@ -1,72 +1,34 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      Fleeca Bank
-    </ion-title>
+    <ion-title>Bienvenido a RegistrAPP</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="logout()">
-        Cerrar Sesión
-      </ion-button>
+      <ion-button (click)="logout()">Cerrar Sesión</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
 
-  <!-- Saludo al usuario -->
-  <h2>Bienvenido, [Nombre Usuario]</h2>
+  <h2 *ngIf="role === 'teacher'">Bienvenido Docente, [Nombre]</h2>
+  <h2 *ngIf="role === 'student'">Bienvenido Estudiante, [Nombre]</h2>
 
-  <!-- Información de la cuenta -->
-  <div class="account-info">
-    <h3>Saldo Disponible</h3>
-    <p class="balance">$ 12,345.67</p>
+  <!-- Mostrar opciones según el rol -->
+  <div *ngIf="role === 'teacher'">
+    <ion-button expand="block" (click)="navigateToQR()">
+      Generar Código QR
+    </ion-button>
   </div>
 
-  <!-- Botones de acciones -->
-  <ion-grid>
-    <ion-row>
-      <ion-col size="6">
-        <ion-button expand="block" fill="outline" (click)="navigateToTransfer()">
-          Transferir
-        </ion-button>
-      </ion-col>
-      <ion-col size="6">
-        <ion-button expand="block" fill="outline" (click)="navigateToTransactions()">
-          Transacciones
-        </ion-button>
-      </ion-col>
-    </ion-row>
+  <div *ngIf="role === 'student'">
+    <ion-button expand="block" (click)="navigateToScanner()">
+      Escanear Código QR
+    </ion-button>
+  </div>
 
-    <ion-row>
-      <ion-col size="6">
-        <ion-button expand="block" fill="outline" (click)="navigateToPayments()">
-          Pagar
-        </ion-button>
-      </ion-col>
-      <ion-col size="6">
-        <ion-button expand="block" fill="outline" (click)="navigateToCards()">
-          Tarjetas
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
-  <!-- Lista de últimas transacciones -->
-  <ion-list>
-    <ion-list-header>
-      Últimas Transacciones
-    </ion-list-header>
-
-    <ion-item *ngFor="let transaction of transactions">
-      <ion-label>
-        <h2>{{ transaction.description }}</h2>
-        <p>{{ transaction.date }}</p>
-      </ion-label>
-      <ion-note slot="end" color="{{ transaction.amount > 0 ? 'success' : 'danger' }}">
-        {{ transaction.amount | currency:'USD' }}
-      </ion-note>
-    </ion-item>
-  </ion-list>
+  <!-- Opciones comunes a ambos roles -->
+  <ion-button expand="block" color="danger" (click)="logout()">
+    Cerrar Sesión
+  </ion-button>
 
 </ion-content>
 

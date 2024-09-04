@@ -1,8 +1,6 @@
-// src/app/home/home.page.ts
-
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../services/auth.service'; // Servicio de autenticación
 
 @Component({
   selector: 'app-home',
@@ -11,45 +9,27 @@ import { AuthService } from '../services/auth.service';
 })
 export class HomePage implements OnInit {
 
-  transactions = [
-    { description: 'Pago en tienda', date: '2024-09-03', amount: -45.99 },
-    { description: 'Transferencia recibida', date: '2024-09-02', amount: 250.00 },
-    { description: 'Pago de servicios', date: '2024-09-01', amount: -120.00 },
-    { description: 'Retiro ATM', date: '2024-08-31', amount: -100.00 }
-  ];
+  role: 'teacher' | 'student'; // Almacena el rol del usuario
 
-  constructor(
-    private navCtrl: NavController,
-    private authService: AuthService
-  ) { }
+  constructor(private navCtrl: NavController, private authService: AuthService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.role = this.authService.getUserRole(); // Obtener el rol del usuario
+  }
 
-  // Función para cerrar sesión
+  // Navegar a la página para generar el código QR (docente)
+  navigateToQR() {
+    this.navCtrl.navigateForward('/teacherhome');
+  }
+
+  // Navegar a la página para escanear el código QR (estudiante)
+  navigateToScanner() {
+    this.navCtrl.navigateForward('/studenthome');
+  }
+
+  // Cerrar sesión
   logout() {
     this.authService.logout();
     this.navCtrl.navigateRoot('/login');
   }
-
-  // Funciones para navegación
-  navigateToTransfer() {
-    console.log('Navegar a Transferencias');
-    // Agrega lógica de navegación
-  }
-
-  navigateToTransactions() {
-    console.log('Navegar a Transacciones');
-    // Agrega lógica de navegación
-  }
-
-  navigateToPayments() {
-    console.log('Navegar a Pagos');
-    // Agrega lógica de navegación
-  }
-
-  navigateToCards() {
-    console.log('Navegar a Tarjetas');
-    // Agrega lógica de navegación
-  }
-
 }
