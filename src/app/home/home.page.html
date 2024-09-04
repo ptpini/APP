@@ -1,20 +1,72 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-title>
-      Blank
+      Fleeca Bank
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        Cerrar Sesión
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <!-- Saludo al usuario -->
+  <h2>Bienvenido, [Nombre Usuario]</h2>
+
+  <!-- Información de la cuenta -->
+  <div class="account-info">
+    <h3>Saldo Disponible</h3>
+    <p class="balance">$ 12,345.67</p>
   </div>
+
+  <!-- Botones de acciones -->
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-button expand="block" fill="outline" (click)="navigateToTransfer()">
+          Transferir
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button expand="block" fill="outline" (click)="navigateToTransactions()">
+          Transacciones
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="6">
+        <ion-button expand="block" fill="outline" (click)="navigateToPayments()">
+          Pagar
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button expand="block" fill="outline" (click)="navigateToCards()">
+          Tarjetas
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Lista de últimas transacciones -->
+  <ion-list>
+    <ion-list-header>
+      Últimas Transacciones
+    </ion-list-header>
+
+    <ion-item *ngFor="let transaction of transactions">
+      <ion-label>
+        <h2>{{ transaction.description }}</h2>
+        <p>{{ transaction.date }}</p>
+      </ion-label>
+      <ion-note slot="end" color="{{ transaction.amount > 0 ? 'success' : 'danger' }}">
+        {{ transaction.amount | currency:'USD' }}
+      </ion-note>
+    </ion-item>
+  </ion-list>
+
 </ion-content>
+
