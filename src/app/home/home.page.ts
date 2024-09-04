@@ -9,7 +9,7 @@ import { AuthService } from '../services/auth.service'; // Servicio de autentica
 })
 export class HomePage implements OnInit {
 
-  role: 'teacher' | 'student'; // Almacena el rol del usuario
+  role!: 'teacher' | 'student'; // Almacena el rol del usuario
 
   constructor(private navCtrl: NavController, private authService: AuthService) {}
 
