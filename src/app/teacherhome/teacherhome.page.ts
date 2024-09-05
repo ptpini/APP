@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-teacher-home',
@@ -8,16 +7,15 @@ import { AuthService } from '../services/auth.service';
 })
 export class TeacherHomePage {
   qrCodeGenerated: boolean = false;
-  qrCode: string = '';
 
-  constructor(private authService: AuthService) {}
+  constructor() {}
 
+  // Simula la generación del código QR
   generateQR() {
     this.qrCodeGenerated = true;
-    this.qrCode = 'ClaseID123456'; // Generación del código QR (puede ser dinámico)
   }
 
   logout() {
-    this.authService.logout();
+    // Lógica para cerrar sesión
   }
 }
