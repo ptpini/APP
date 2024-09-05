@@ -1,20 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-import { IonicModule } from '@ionic/angular';
+import { IonicModule } from '@ionic/angular';  // Asegúrate de importar IonicModule
 
 import { TeacherhomePageRoutingModule } from './teacherhome-routing.module';
-
-import { TeacherhomePage } from './teacherhome.page';
+import { TeacherHomePage } from './teacherhome.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule,
+    IonicModule,  // Necesario para usar componentes de Ionic
     TeacherhomePageRoutingModule
   ],
-  declarations: [TeacherhomePage]
+  declarations: [TeacherHomePage]
 })
-export class TeacherhomePageModule {}
+export class TeacherHomePageModule {}

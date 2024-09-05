@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './services/auth.guard'; // Importar el guard
+import { AuthGuard } from './services/auth.guard';  // Importar AuthGuard
 
 const routes: Routes = [
   {
@@ -15,12 +15,12 @@ const routes: Routes = [
   {
     path: 'teacherhome',
     loadChildren: () => import('./teacherhome/teacherhome.module').then(m => m.TeacherhomePageModule),
-    canActivate: [AuthGuard] // Protegemos esta ruta
+    canActivate: [AuthGuard]  // Protegemos esta ruta
   },
   {
     path: 'studenthome',
     loadChildren: () => import('./studenthome/studenthome.module').then(m => m.StudenthomePageModule),
-    canActivate: [AuthGuard] // Protegemos esta ruta
+    canActivate: [AuthGuard]  // Protegemos esta ruta
   }
 ];
 
@@ -29,3 +29,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
+
