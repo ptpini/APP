@@ -21,14 +21,17 @@ export class AuthService {
     return false;
   }
 
+  // Retorna el estado de autenticación
   isLoggedIn(): boolean {
     return this.isAuthenticated;
   }
 
+  // Retorna el rol del usuario autenticado
   getUserRole(): 'teacher' | 'student' {
     return this.role;
   }
 
+  // Método para cerrar sesión
   logout() {
     this.isAuthenticated = false;
   }
