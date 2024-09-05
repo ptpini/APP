@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
   private isAuthenticated: boolean = false;
-  private role: 'teacher' | 'student' = 'student';  // Ejemplo para roles
+  private role: 'teacher' | 'student' = 'student';  // Simulación de roles
 
   // Simulación de autenticación
   login(username: string, password: string): boolean {
@@ -21,20 +21,15 @@ export class AuthService {
     return false;
   }
 
-  // Retorna si el usuario está autenticado
   isLoggedIn(): boolean {
     return this.isAuthenticated;
   }
 
-  // Retorna el rol del usuario
   getUserRole(): 'teacher' | 'student' {
     return this.role;
   }
 
-  // Cierra sesión
   logout() {
     this.isAuthenticated = false;
   }
 }
-
-

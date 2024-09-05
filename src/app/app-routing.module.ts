@@ -14,12 +14,12 @@ const routes: Routes = [
   },
   {
     path: 'teacherhome',
-    loadChildren: () => import('./teacherhome/teacherhome.module').then(m => m.TeacherhomePageModule),
+    loadChildren: () => import('./teacherhome/teacherhome.module').then(m => m.TeacherHomePageModule),
     canActivate: [AuthGuard]  // Protegemos esta ruta
   },
   {
     path: 'studenthome',
-    loadChildren: () => import('./studenthome/studenthome.module').then(m => m.StudenthomePageModule),
+    loadChildren: () => import('./studenthome/studenthome.module').then(m => m.StudentHomePageModule),
     canActivate: [AuthGuard]  // Protegemos esta ruta
   }
 ];
